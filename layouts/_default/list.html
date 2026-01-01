@@ -1,0 +1,27 @@
+{{ define "main" }}
+  
+  {{/* Titre de la série en haut de page */}}
+  <h2 style="margin-bottom: 20px; text-transform: uppercase; font-size: 14px; color: #666;">{{ .Title }}</h2>
+
+  {{/* Boucle sur toutes les images du dossier */}}
+  {{ range .Resources.ByType "image" }}
+    
+    {{/* Génération Grand Format (1600px large) */}}
+    {{ $large := .Resize "1600x" }}
+    
+    {{/* Génération Miniature affichée sur le site (ex: 1000px large pour les écrans retina) */}}
+    {{ $display := .Resize "1000x" }}
+
+    <a href="{{ $large.RelPermalink }}" 
+       data-pswp-width="{{ $large.Width }}" 
+       data-pswp-height="{{ $large.Height }}" 
+       target="_blank">
+      
+      <img src="{{ $display.RelPermalink }}" 
+           alt="{{ .Name }}" 
+           loading="lazy" />
+    </a>
+
+  {{ end }}
+
+  {{ .Content }} {{ end }}
