@@ -1,0 +1,10 @@
+baseURL = "/"
+languageCode = "fr-fr"
+title = "Mon Portfolio"
+theme = []
+
+[markup.goldmark.renderer]
+unsafe = true # Autorise un peu de HTML si besoin
+
+[server]
+# Utile si un jour vous testez en local, mais pas obligatoire ici
