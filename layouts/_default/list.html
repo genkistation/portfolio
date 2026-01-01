@@ -10,7 +10,7 @@
     {{ $large := .Resize "2000x jpg q90 Lanczos" }}
     
     {{/* 2. Affichage sur la page : 1200px (format retina-ready), Qualité 85% */}}
-    {{ $display := .Resize "1200x jpg q85 Lanczos" }}
+    {{ $display := .Resize "600x jpg q85 Lanczos" }}
 
     <a href="{{ $large.RelPermalink }}" 
        data-pswp-width="{{ $large.Width }}" 
