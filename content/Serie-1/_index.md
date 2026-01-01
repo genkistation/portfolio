@@ -1,3 +1,3 @@
 ---
-title: "Série 1"
+title: "SERIE 1"
 ---
