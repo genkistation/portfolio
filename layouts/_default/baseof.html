@@ -67,6 +67,11 @@
     {{ with .Site.GetPage "/bio" }}
       <a href="{{ .RelPermalink }}" class="{{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">Bio</a>
     {{ end }}
+
+    <div style="margin-top: auto; padding-top: 40px; color: #bbb; font-size: 10px; letter-spacing: 0.5px;">
+  &copy; {{ now.Format "2006" }} genkistation<br>All rights reserved
+</div>
+    
   </nav>
 
   <div class="content">
@@ -87,5 +92,15 @@
     lightbox.init();
   </script>
 
+  <script>
+  // Bloque le clic droit sur tout le site
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Bloque le glisser-déposer des images
+  document.addEventListener('dragstart', event => {
+    if (event.target.tagName === 'IMG') event.preventDefault();
+  });
+</script>
+  
 </body>
 </html>
