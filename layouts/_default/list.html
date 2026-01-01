@@ -1,16 +1,16 @@
 {{ define "main" }}
   
-  {{/* Titre de la série en haut de page */}}
-  <h2 style="margin-bottom: 20px; text-transform: uppercase; font-size: 14px; color: #666;">{{ .Title }}</h2>
+  {{/* Titre de la série */}}
+  <h2 style="margin-bottom: 20px; text-transform: uppercase; font-size: 14px; color: #666; letter-spacing: 1px;">{{ .Title }}</h2>
 
-  {{/* Boucle sur toutes les images du dossier */}}
+  {{/* Boucle sur les images du dossier */}}
   {{ range .Resources.ByType "image" }}
     
-    {{/* Génération Grand Format (1600px large) */}}
-    {{ $large := .Resize "1600x" }}
+    {{/* 1. Grand Format : 2000px, Qualité 90%, Filtre Lanczos (netteté max) */}}
+    {{ $large := .Resize "2000x jpg q90 Lanczos" }}
     
-    {{/* Génération Miniature affichée sur le site (ex: 1000px large pour les écrans retina) */}}
-    {{ $display := .Resize "1000x" }}
+    {{/* 2. Affichage sur la page : 1200px (format retina-ready), Qualité 85% */}}
+    {{ $display := .Resize "1200x jpg q85 Lanczos" }}
 
     <a href="{{ $large.RelPermalink }}" 
        data-pswp-width="{{ $large.Width }}" 
@@ -19,9 +19,11 @@
       
       <img src="{{ $display.RelPermalink }}" 
            alt="{{ .Name }}" 
-           loading="lazy" />
+           loading="lazy" 
+           style="margin-bottom: 40px; width: 100%; height: auto; display: block;" />
     </a>
 
   {{ end }}
 
-  {{ .Content }} {{ end }}
+  {{ .Content }}
+{{ end }}
