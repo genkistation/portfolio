@@ -1,6 +1,6 @@
 baseURL = "https://genkistation.github.io/photography/"
 languageCode = "fr-fr"
-title = "Mon Portfolio"
+title = "photography"
 theme = []
 
 [markup.goldmark.renderer]
