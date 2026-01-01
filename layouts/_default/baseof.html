@@ -8,53 +8,55 @@
   <link rel="stylesheet" href="https://unpkg.com/photoswipe@5/dist/photoswipe.css" />
 
   <style>
-    body { margin: 0; padding: 0; display: flex; height: 100vh; font-family: Arial, sans-serif; background: #fff; }
+    body { margin: 0; padding: 0; display: flex; height: 100vh; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; background: #f9f9f9; color: #333; }
     
     /* MENU GAUCHE */
-    nav { width: 220px; padding: 40px 25px; box-sizing: border-box; display: flex; flex-direction: column; font-size: 13px; border-right: 1px solid #eee; background: white; position: sticky; top: 0; }
-    nav h1 { margin: 0 0 40px 0; font-size: 15px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    nav { width: 240px; padding: 60px 40px; box-sizing: border-box; display: flex; flex-direction: column; font-size: 12px; background: #f9f9f9; position: sticky; top: 0; height: 100vh; }
+    nav h1 { margin: 0 0 50px 0; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
     nav h1 a { color: black; text-decoration: none; }
-    nav a { text-decoration: none; color: #666; margin-bottom: 15px; cursor: pointer; transition: color 0.2s; }
-    nav a:hover, nav a.active { color: black; font-weight: bold; }
+    nav a { text-decoration: none; color: #999; margin-bottom: 15px; cursor: pointer; transition: color 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+    nav a:hover, nav a.active { color: black; }
 
     /* CONTENU */
-    .content { flex: 1; padding: 40px; overflow-y: auto; box-sizing: border-box; }
+    .content { flex: 1; padding: 60px; overflow-y: auto; box-sizing: border-box; }
     
-    /* GRILLE DE MINIATURES */
+    /* GRILLE STYLE */
     .gallery { 
         display: grid; 
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Crée des colonnes automatiques de 250px */
-        gap: 15px; /* Espace entre les photos */
+        /* Ici on réduit la taille : miniatures de 180px minimum */
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+        gap: 30px; /* Plus d'espace entre les photos */
     }
     
     .gallery a { 
         display: block; 
-        /* aspect-ratio: 1 / 1; */ /* Force les miniatures en carré (optionnel) */
-        overflow: hidden;
-        transition: opacity 0.3s;
+        text-decoration: none;
+        transition: opacity 0.4s ease;
     }
     
-    .gallery a:hover { opacity: 0.8; }
+    .gallery a:hover { opacity: 0.7; }
     
     .gallery img { 
         width: 100%; 
-        height: 100%; 
-        /* object-fit: cover; */ /* Remplit le carré sans déformer l'image */
-        display: block; 
+        height: auto; /* On laisse la photo respirer dans son format original */
+        display: block;
+        /* Optionnel : légère ombre très fine pour détacher du fond gris */
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
     }
 
-    /* Mobile : menu au dessus sur petit écran */
+    /* Mobile */
     @media (max-width: 768px) {
         body { flex-direction: column; }
-        nav { width: 100%; height: auto; border-right: none; border-bottom: 1px solid #eee; position: relative; }
-        .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+        nav { width: 100%; height: auto; padding: 30px; position: relative; }
+        .content { padding: 20px; }
+        .gallery { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; }
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <h1><a href="/">MON PORTFOLIO</a></h1>
+    <h1><a href="/">genkistation</a></h1>
     
     {{ range .Site.Sections }}
       <a href="{{ .RelPermalink }}" class="{{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
