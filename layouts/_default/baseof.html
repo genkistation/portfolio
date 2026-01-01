@@ -58,7 +58,7 @@
   <nav>
     <h1><a href="/">genkistation</a></h1>
     
-    {{ range .Site.Sections }}
+    {{ range .Site.Sections.ByWeight }}
       <a href="{{ .RelPermalink }}" class="{{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
         {{ .Title }}
       </a>
