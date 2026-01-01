@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ .Title }}</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/photoswipe@5/dist/photoswipe.css" />
+
+  <style>
+    body { margin: 0; padding: 0; display: flex; height: 100vh; font-family: Arial, sans-serif; background: #f5f5f5; }
+    
+    /* MENU GAUCHE */
+    nav { width: 200px; padding: 25px; box-sizing: border-box; display: flex; flex-direction: column; font-size: 14px; border-right: 1px solid #ddd; background: white; }
+    nav h1 { margin: 0 0 30px 0; font-size: 16px; font-weight: bold; text-transform: uppercase; }
+    nav a { text-decoration: none; color: black; margin-bottom: 12px; cursor: pointer; }
+    nav a:hover, nav a.active { opacity: 0.5; font-weight: bold; }
+
+    /* CONTENU */
+    .content { flex: 1; padding: 40px; overflow-y: auto; box-sizing: border-box; }
+    
+    .gallery { display: flex; flex-direction: column; align-items: center; }
+    .gallery a { margin-bottom: 40px; width: 90%; max-width: 1400px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
+    .gallery a:hover { transform: scale(1.01); }
+    .gallery img { width: 100%; height: auto; display: block; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <h1><a href="/">MON PORTFOLIO</a></h1>
+    
+    {{ range .Site.Sections }}
+      <a href="{{ .RelPermalink }}" class="{{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
+        {{ .Title }}
+      </a>
+    {{ end }}
+    
+    {{ with .Site.GetPage "/bio" }}
+      <a href="{{ .RelPermalink }}" class="{{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">Bio</a>
+    {{ end }}
+  </nav>
+
+  <div class="content">
+    <div id="gallery" class="gallery">
+      {{ block "main" . }}{{ end }}
+    </div>
+  </div>
+
+  <script type="module">
+    import PhotoSwipeLightbox from "https://unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.js";
+    import PhotoSwipe from "https://unpkg.com/photoswipe@5/dist/photoswipe.esm.js";
+
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '#gallery',
+      children: 'a',
+      pswpModule: PhotoSwipe,
+    });
+    lightbox.init();
+  </script>
+
+</body>
+</html>
