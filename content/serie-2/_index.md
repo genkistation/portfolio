@@ -1,4 +1,4 @@
 ---
-title: "serie-2"
+title: "SERIE 2"
 weight: 20
 ---
